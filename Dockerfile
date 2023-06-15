@@ -50,4 +50,11 @@ RUN chown root /etc/udev/rules.d/51-android.rules
 # Set username.
 USER minerva
 
+# Set Android working directory.
+WORKDIR /home/minerva/android
+
+# Sync AOSP source.
+RUN repo init --no-repo-verify --depth=1 -u https://github.com/PixelExperience/manifest -b thirteen -g default,-mips,-darwin,-notdefault
+RUN repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j$(nproc --all)
+
 VOLUME ["/home/minerva"]
