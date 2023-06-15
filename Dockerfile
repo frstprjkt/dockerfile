@@ -12,6 +12,9 @@ ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 # Create new user.
 RUN useradd -ms /bin/bash minerva
 
+# Set working directory.
+WORKDIR /home/minerva
+
 # Install all required packages.
 RUN apt-get update -y
 RUN apt-get install -y \
@@ -46,8 +49,5 @@ RUN chown root /etc/udev/rules.d/51-android.rules
 
 # Set username.
 USER minerva
-
-# Set working directory.
-WORKDIR /home/minerva
 
 VOLUME ["/home/minerva"]
